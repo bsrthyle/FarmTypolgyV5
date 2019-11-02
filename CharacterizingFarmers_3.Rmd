@@ -158,10 +158,10 @@ income, and who cultivate land or keep livestock.]
 ```{r, message=FALSE, warning=FALSE,comment=FALSE,}
 library(rgdal)
 library(leaflet)
-shapeData <- readOGR(".", "StudyArea", verbose = FALSE)
+shapeData <- readOGR(here("StudyAreaMap"), "StudyArea", verbose = FALSE)
 shapeData <- spTransform(shapeData, CRS("+proj=longlat +datum=WGS84 +no_defs"))
 
-cities<- read.csv2("wardCenterPoint.csv")
+cities<- read.csv2(here("Data_csv", "wardCenterPoint.csv"))
 leaflet(shapeData) %>%
   #  addTiles()%>%
   #addProviderTiles(providers$Stamen.TerrainBackground)%>%
@@ -423,7 +423,7 @@ plot_ly(data, x = ~p, y = ~L, name="Lorenz curve", type = 'scatter', mode = 'lin
 
 foodsecurity1 <- list.data$FoodSecurityFinal.dta
 
-farmType <- read.csv("DataWithCluster.csv")
+farmType <- read.csv(here("Data_csv", "DataWithCluster.csv"))
 farmType <- farmType[,c(16,17)]
 
 foodsecurity <- merge(foodsecurity1, farmType, by="hhid")
@@ -625,8 +625,6 @@ plot_ly(x=x$WetStart, type = "histogram")
 ```
 
 
-```{r}
-```
 
 
 ```{r}
@@ -1302,9 +1300,9 @@ df_summary_1 <- df_summary[c(1:6),]
 df_summary_2 <- df_summary[c(7:12),]
 df_summary_3 <- df_summary[c(13:19),]
 
-write.csv(df_summary_1, "Perception1.csv")
-write.csv(df_summary_2, "Perception2.csv")
-write.csv(df_summary_3, "Perception3.csv")
+write.csv(df_summary_1, here::here("Data_csv","Perception1.csv"))
+write.csv(df_summary_2, here::here("Data_csv","Perception2.csv"))
+write.csv(df_summary_3, here::here("Data_csv","Perception3.csv"))
 #set.seed(10)
 #list.perceptiondata <-split(df_summary, sample(rep(1:4, 5)))
 #
@@ -1364,7 +1362,7 @@ gg4<-plot(Result4,
 
 ```{r, fig.width=8}
 options(stringsAsFactors = FALSE)
-data <- read.csv("Perception1.csv")
+data <- read.csv(here::here("Data_csv","Perception1.csv"))
 data <- data[,c(2:7)]
 data <- round_df(data)
 names(data) <- c("y", "x1","x2","x3","x4", "x5")
@@ -1453,7 +1451,7 @@ p
 
 ```{r}
 options(stringsAsFactors = FALSE)
-data <- read.csv("Perception2.csv")
+data <- read.csv(here::here("Data_csv","Perception2.csv"))
 data <- data[,c(2:7)]
 data <- round_df(data)
 names(data) <- c("y", "x1","x2","x3","x4", "x5")
@@ -1542,7 +1540,7 @@ p2
 
 ```{r}
 options(stringsAsFactors = FALSE)
-data <- read.csv("Perception3.csv")
+data <- read.csv(here::here("Data_csv","Perception3.csv"))
 data <- data[,c(2:7)]
 data <- round_df(data)
 names(data) <- c("y", "x1","x2","x3","x4", "x5")
@@ -1903,7 +1901,7 @@ foodsecurity2 <- foodsecurity1[which(foodsecurity1$PercapitaDailyEnergyAcquistio
 foodsecurity2$PercapitaDailyEnergyAcquistion_1 <- foodsecurity2$HHDailyEnergyAcquistion/foodsecurity2$hhae
 
 
-farmType <- read.csv("DataWithCluster.csv")
+farmType <- read.csv(here::here("Data_csv","DataWithCluster.csv"))
 farmType <- farmType[,c(16,17)]
 
 foodsecurity <- merge(foodsecurity2, farmType, by="hhid")
