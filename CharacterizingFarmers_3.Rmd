@@ -155,10 +155,10 @@ income, and who cultivate land or keep livestock.]
 #knitr::include_graphics("map.png")
 ```
 
-```{r, message=FALSE, warning=FALSE,comment=FALSE,}
+```{r, message=FALSE, warning=FALSE,comment=FALSE}
 library(rgdal)
 library(leaflet)
-shapeData <- readOGR(here("StudyAreaMap"), "StudyArea", verbose = FALSE)
+shapeData <- readOGR("StudyAreaMap/StudyArea.shp", "StudyArea", verbose = FALSE)
 shapeData <- spTransform(shapeData, CRS("+proj=longlat +datum=WGS84 +no_defs"))
 
 cities<- read.csv2(here("Data_csv", "wardCenterPoint.csv"))
@@ -655,7 +655,7 @@ wetstart3 <- reshape2::melt(wetstart2, id.vars = "WetStart")
 p <- ggplot(wetstart3, aes(x = WetStart, y = value))+
   #geom_smooth(method = "loess")+
   facet_grid(variable~., scales = "free")+
-  theme_minimal(base_family = "verdana")
+  theme_minimal(base_family = "Arial")
 p 
 ggplotly(p)
 
@@ -922,7 +922,7 @@ gg<-ggplot(df2,aes(x = value)) + stat_ecdf(aes(colour = variable, geom = "step")
   
   guides(fill=guide_legend(title = NULL))+
   labs(x="Yield in Kg/ha", y="ecd", title= "Empirical cumulative distribution of yield for Rice and Maize")+theme_light()+scale_fill_economist()+
-  theme(legend.title=element_blank(),plot.title = element_text(hjust = 0.5, size = 12, family = "verdana"))
+  theme(legend.title=element_blank(),plot.title = element_text(hjust = 0.5, size = 12))
 gg
 
 
@@ -1121,7 +1121,7 @@ c <- ggplot(df, aes(df$FarmSize_Ha, df$HouseholdCommercializationIndex))+ stat_s
   theme_light()
 ggplotly(c)%>%
   layout(title=" Locally Weighted Regression Between Farm Size and Commercialization Index", font=list(
-    family = "verdana",
+    family = "Arial",
     size = 11,
     color = '#0d8458'))
 
@@ -1162,7 +1162,7 @@ levels(df3$value) <- c("brokers","Business<br>or work<br>associates","Community<
 levels(df3$key) <- c("ProducionAndExtension", "Market Information", "Government Policy")
 plot_ly(df3,x=~value, y = ~Percent, color = ~key, colors = mycolor3) %>%
   layout(title = "Source of Information",
-         xaxis = list(title = "", tickfont=list(size=13, family="verdana")),
+         xaxis = list(title = "", tickfont=list(size=13, family="Arial")),
          yaxis = list(title = "Percent of Households"),  margin=list(l = 60, r = 5, t = 50, b = 150),legend = list(orientation = 'h', xanchor="center", x=0.2, y=-0.5)) 
 
 
@@ -1966,7 +1966,7 @@ g <- ggplot(df_box, aes(clust, FarmSize_Ha))+ stat_boxplot(geom = "errorbar", wi
   comparisons = my_comparisons,
   method = "t.test",
   label = "p.signif"
-) + theme_fivethirtyeight( base_family = "Verdana") + labs(
+) + theme_fivethirtyeight( base_family = "Arial") + labs(
   x = "",
   title = "Farm Size by Farmer Type",
   caption = " Pairwise mean comparisons [ns: p > 0.05] [*: p <= 0.05]
@@ -1981,7 +1981,7 @@ g
 g <- ggplot(df_box, aes(clust, ShareOfRice))+ stat_boxplot(geom = "errorbar", width = 0.2, linetype=3) + geom_boxplot(aes(fill = clust),
                                                                                                                       width =
                                                                                                                         0.4, alpha = 0.5
-) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Verdana") + labs(
+) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Arial") + labs(
   x = "",
   title = "Share of land allocated to Rice by Farmer Type",
   caption = " Pairwise mean comparisons [ns: p > 0.05] [*: p <= 0.05]
@@ -1996,7 +1996,7 @@ g
 g <- ggplot(df_box, aes(clust, ShareOfMaize))+ stat_boxplot(geom = "errorbar", width = 0.2, linetype=3) + geom_boxplot(aes(fill = clust),
                                                                                                                        width =
                                                                                                                          0.4, alpha = 0.5
-) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Verdana") + labs(
+) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Arial") + labs(
   x = "",
   title = "Share of land allocated to Maize by Farmer Type",
   caption = " Pairwise mean comparisons [ns: p > 0.05] [*: p <= 0.05]
@@ -2011,7 +2011,7 @@ g
 g <- ggplot(df_box, aes(clust, HouseholdCommercializationIndex))+ stat_boxplot(geom = "errorbar", width = 0.2, linetype=3) + geom_boxplot(aes(fill = clust),
                                                                                                                                           width =
                                                                                                                                             0.4, alpha = 0.5
-) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Verdana") + labs(
+) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Arial") + labs(
   x = "",
   title = "Commercialization Index by Farmer Type",
   caption = " Pairwise mean comparisons [ns: p > 0.05] [*: p <= 0.05]
@@ -2026,7 +2026,7 @@ g
 g <- ggplot(df_box, aes(clust, HHsize))+ stat_boxplot(geom = "errorbar", width = 0.2, linetype=3)  + geom_boxplot(aes(fill = clust),
                                                                                                                   width =
                                                                                                                     0.4, alpha = 0.5
-)+ stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Verdana") + labs(
+)+ stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Arial") + labs(
   x = "",
   title = "Household Size by Farmer Type",
   caption = " Pairwise mean comparisons [ns: p > 0.05] [*: p <= 0.05]
@@ -2041,7 +2041,7 @@ g
 g <- ggplot(df_box, aes(clust, PercentHired))+ stat_boxplot(geom = "errorbar", width = 0.2, linetype=3)  + geom_boxplot(aes(fill = clust),
                                                                                                                         width =
                                                                                                                           0.4, alpha = 0.5
-)+ stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Verdana") + labs(
+)+ stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Arial") + labs(
   x = "",
   title = "Percent of Hired labor by Farmer Type",
   caption = " Pairwise mean comparisons [ns: p > 0.05] [*: p <= 0.05]
@@ -2056,7 +2056,7 @@ g
 g <- ggplot(df_box[which(df_box$TLU < 20), ], aes(clust, TLU))+ stat_boxplot(geom = "errorbar", width = 0.2, linetype=3) + geom_boxplot(aes(fill = clust),
                                                                                                                                         width =
                                                                                                                                           0.4, alpha = 0.5
-) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Verdana") + labs(
+) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Arial") + labs(
   x = "",
   title = "Tropical Livestock Unit by Farmer Type",
   caption = " Pairwise mean comparisons [ns: p > 0.05] [*: p <= 0.05]
@@ -2071,7 +2071,7 @@ g
 g <- ggplot(df_box, aes(clust, Age))+ stat_boxplot(geom = "errorbar", width = 0.2, linetype=3) + geom_boxplot(aes(fill = clust),
                                                                                                               width =
                                                                                                                 0.4, alpha = 0.5
-) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Verdana") + labs(
+) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Arial") + labs(
   x = "",
   title = "Age of Household Head by Farmer Type",
   caption = " Pairwise mean comparisons [ns: p > 0.05] [*: p <= 0.05]
@@ -2086,7 +2086,7 @@ g
 g <- ggplot(df_box[which(df_box$PerCapitaIncome<4000),], aes(clust, PerCapitaIncome))+ stat_boxplot(geom = "errorbar", width = 0.2, linetype=3) + geom_boxplot(aes(fill = clust),
                                                                                                                                                                width =
                                                                                                                                                                  0.4, alpha = 0.5
-) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Verdana") + labs(
+) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Arial") + labs(
   x = "",
   title = "Percapita Income by Farmer Type",
   caption = " Pairwise mean comparisons [ns: p > 0.05] [*: p <= 0.05]
@@ -2276,7 +2276,7 @@ res.hcpc2 <- HCPC(res.pca, graph = FALSE)
 ```{r, cache=TRUE}
 # Plot the dendrogram only
 
-fviz_dend(res.hcpc2, show_labels = FALSE, k_colors = c("#26547C","#EF476F","#FFD166"), rect = TRUE, rect_fill = TRUE, rect_border = c("#26547C","#EF476F","#FFD166"),lower_rect = -0.1, ggtheme = theme_grey(base_family = "Verdana"))
+fviz_dend(res.hcpc2, show_labels = FALSE, k_colors = c("#26547C","#EF476F","#FFD166"), rect = TRUE, rect_fill = TRUE, rect_border = c("#26547C","#EF476F","#FFD166"),lower_rect = -0.1, ggtheme = theme_grey(base_family = "Arial"))
 
 #gplotly(f)%>%layout(showlegend=F)
 # Draw only the factor map
@@ -2363,7 +2363,7 @@ g <- ggplot(DataWithCluster, aes(FarmType, SizeOfCropLand)) + geom_boxplot(aes(f
     comparisons = my_comparisons,
     method = "t.test",
     label = "p.signif"
-  ) + theme_fivethirtyeight( base_family = "Verdana") + labs(
+  ) + theme_fivethirtyeight( base_family = "Arial") + labs(
     x = "",
     title = "Farm Size by Farmer Type",
     caption = " Pairwise mean comparisons [ns: p > 0.05] [*: p <= 0.05]
@@ -2377,7 +2377,7 @@ g
 g <- ggplot(DataWithCluster, aes(FarmType, ShareOfRice)) + geom_boxplot(aes(fill = FarmType),
                                                                         width =
                                                                           0.4, alpha = 0.5
-)+ stat_boxplot(geom = "errorbar", width = 0.2) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Verdana") + labs(
+)+ stat_boxplot(geom = "errorbar", width = 0.2) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Arial") + labs(
   x = "",
   title = "Share of land allocated to Rice by Farmer Type",
   caption = " Pairwise mean comparisons [ns: p > 0.05] [*: p <= 0.05]
@@ -2391,7 +2391,7 @@ g
 g <- ggplot(DataWithCluster, aes(FarmType, ShareOfMaize)) + geom_boxplot(aes(fill = FarmType),
                                                                          width =
                                                                            0.4, alpha = 0.5
-)+ stat_boxplot(geom = "errorbar", width = 0.2) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Verdana") + labs(
+)+ stat_boxplot(geom = "errorbar", width = 0.2) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Arial") + labs(
   x = "",
   title = "Share of land allocated to Maize by Farmer Type",
   caption = " Pairwise mean comparisons [ns: p > 0.05] [*: p <= 0.05]
@@ -2405,7 +2405,7 @@ g
 g <- ggplot(DataWithCluster, aes(FarmType, CommercializationIndex)) + geom_boxplot(aes(fill = FarmType),
                                                                                    width =
                                                                                      0.4, alpha = 0.5
-)+ stat_boxplot(geom = "errorbar", width = 0.2) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Verdana") + labs(
+)+ stat_boxplot(geom = "errorbar", width = 0.2) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Arial") + labs(
   x = "",
   title = "Commercialization Index by Farmer Type",
   caption = " Pairwise mean comparisons [ns: p > 0.05] [*: p <= 0.05]
@@ -2419,7 +2419,7 @@ g
 g <- ggplot(DataWithCluster, aes(FarmType, HHsize)) + geom_boxplot(aes(fill = FarmType),
                                                                    width =
                                                                      0.4, alpha = 0.5
-)+ stat_boxplot(geom = "errorbar", width = 0.2) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Verdana") + labs(
+)+ stat_boxplot(geom = "errorbar", width = 0.2) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Arial") + labs(
   x = "",
   title = "Household Size by Farmer Type",
   caption = " Pairwise mean comparisons [ns: p > 0.05] [*: p <= 0.05]
@@ -2433,7 +2433,7 @@ g
 g <- ggplot(DataWithCluster, aes(FarmType, DistanceFromRiverInKm)) + geom_boxplot(aes(fill = FarmType),
                                                                                   width =
                                                                                     0.4, alpha = 0.5
-)+ stat_boxplot(geom = "errorbar", width = 0.2) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Verdana") + labs(
+)+ stat_boxplot(geom = "errorbar", width = 0.2) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Arial") + labs(
   x = "",
   title = "Distance from the River by Farmer Type",
   caption = " Pairwise mean comparisons [ns: p > 0.05] [*: p <= 0.05]
@@ -2447,7 +2447,7 @@ g
 g <- ggplot(DataWithCluster[which(DataWithCluster$TLU < 20), ], aes(FarmType, TLU)) + geom_boxplot(aes(fill = FarmType),
                                                                                                    width =
                                                                                                      0.4, alpha = 0.5
-)+ stat_boxplot(geom = "errorbar", width = 0.2) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Verdana") + labs(
+)+ stat_boxplot(geom = "errorbar", width = 0.2) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Arial") + labs(
   x = "",
   title = "Tropical Livestock Unit by Farmer Type",
   caption = " Pairwise mean comparisons [ns: p > 0.05] [*: p <= 0.05]
@@ -2461,7 +2461,7 @@ g
 g <- ggplot(DataWithCluster, aes(FarmType, Age)) + geom_boxplot(aes(fill = FarmType),
                                                                 width =
                                                                   0.4, alpha = 0.5
-)+ stat_boxplot(geom = "errorbar", width = 0.2) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Verdana") + labs(
+)+ stat_boxplot(geom = "errorbar", width = 0.2) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Arial") + labs(
   x = "",
   title = "Age of Household Head by Farmer Type",
   caption = " Pairwise mean comparisons [ns: p > 0.05] [*: p <= 0.05]
@@ -2475,7 +2475,7 @@ g
 g <- ggplot(DataWithCluster, aes(FarmType, DistanceFromIfakara)) + geom_boxplot(aes(fill = FarmType),
                                                                                 width =
                                                                                   0.3, alpha = 0.8
-)+ stat_boxplot(geom = "errorbar", width = 0.1) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Verdana") + labs(
+)+ stat_boxplot(geom = "errorbar", width = 0.1) + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + theme_fivethirtyeight( base_family = "Arial") + labs(
   x = "",
   title = "Distance from the market by Farmer Type",
   caption = " Pairwise mean comparisons [ns: p > 0.05] [*: p <= 0.05]
