@@ -1889,7 +1889,7 @@ plot_ly(df, labels = ~value, values = ~prop, type = 'pie',
 ```
 
 
-```{r}
+```{r echo=FALSE,eval=FALSE}
 #foodsecurity <- as_factor(haven::read_dta(here("Data", "FoodSecurityFinal.dta"), "labels"))
 
 foodsecurity1 <- list.data$FoodSecurityFinal.dta
