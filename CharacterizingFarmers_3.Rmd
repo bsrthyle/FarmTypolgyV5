@@ -251,7 +251,7 @@ plot_ly(df2, labels= ~df, values= ~counts, marker = list(colors = mycolor3,
          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 
 ```
-```{r }
+```{r}
 
 
 x <- list.data$combinedNew.dta$HHsize
