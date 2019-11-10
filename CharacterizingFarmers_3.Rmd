@@ -1263,7 +1263,7 @@ names(original.data2) <- c(
   "Government officials are effective<br> in protecting the wetland",
   "It is safe to leave my home unattended<br> because no one can steal anything",
   "People in this area feel generally secure<br> when dealing with outsiders ",
-  "If I drop my wallet/purse somewhere within<br> this village, I am likely to get it back",
+  "If I drop my wallet or purse somewhere within<br> this village, I am likely to get it back",
   "People in this area have <br>strong traditional attachment to wetlands",
   "Most of my neighbours  have lost some assets <br> or livestock to thieves within the last five years",
   "Farm sizes in my village have <br>declined compared to the past",
@@ -1281,9 +1281,9 @@ df_summary_1 <- df_summary[c(1:6),]
 df_summary_2 <- df_summary[c(7:12),]
 df_summary_3 <- df_summary[c(13:19),]
 
-#write.csv(df_summary_1, here::here("Data_csv","Perception1.csv"))
-#write.csv(df_summary_2, here::here("Data_csv","Perception2.csv"))
-#write.csv(df_summary_3, here::here("Data_csv","Perception3.csv"))
+# write.csv(df_summary_1, here::here("Data_csv","Perception1.csv"))
+# write.csv(df_summary_2, here::here("Data_csv","Perception2.csv"))
+# write.csv(df_summary_3, here::here("Data_csv","Perception3.csv"))
 
 ```
 
@@ -1545,6 +1545,8 @@ p3 <- plot_ly(data, x = ~x1, y = ~y, type = 'bar', orientation = 'h', name="Stro
          paper_bgcolor = 'rgb(248, 248, 255)', plot_bgcolor = 'rgb(248, 248, 255)',
          margin = list(l = 150, r = 5, t = 140, b = 60),
          showlegend = FALSE) %>%
+  
+  
   # labeling the y-axis
   add_annotations(xref = 'paper', yref = 'y', x = 0.14, y = y,
                   xanchor = 'right',
