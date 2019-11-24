@@ -948,9 +948,9 @@ plot_ly(df, labels = ~variable, values = ~Avarage, type = 'pie',
 ```
 
 
-### Constraint to Intensification
 
-```{r}
+
+```{r, echo=FALSE}
 # read the intensification reason data 
 data <- list.data$IntensificationReason2.dta
 ```
