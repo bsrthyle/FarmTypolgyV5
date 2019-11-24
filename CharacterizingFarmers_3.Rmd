@@ -2,8 +2,8 @@
 title: "Characterizing Farmers and Farming system in Kilombero Valley Floodplain,Tanzania"
 author: 
   affiliation: Institute of Food and Resource Economics
-  email: bisrat.gebrekidan@ilr.uni-bonn.de
-  name: Bisrat Haile
+  email: bisrat[dot]gebrekidan[at]ilr.uni-bonn.de
+  name: Bisrat H. Gebrekidan
 date: "6/2/2017"
 output: 
   html_document: 
@@ -1620,17 +1620,17 @@ In the following sections, we will provide the procedure (and R code) that is fo
 Main references for statistical method and software implementation are listed at the endof the notebook.
 
 
-The following table presents the full cleaned original data that will be used for the analysis below. 
 
-```{r}
+
+```{r, echo=FALSE, results="hide"}
 # read in the data
 data <- list.data$typologydata.dta
 data1 <- data[,-c(1, 8,12,13, 16)]
 data1 <- remove_missing(data1)
-DT::datatable(round_df(data1, 3),  class = 'table-bordered', caption = htmltools::tags$caption(
-  style = 'caption-side: bottom; text-align: center;',
-  'Table 5: ', htmltools::em('The Cleaned data used for Typology Analysis.')
-), options = list(searching = FALSE,pageLength = 10,lengthMenu = c(5, 10, 15, 20), scrollX = T))
+#DT::datatable(round_df(data1, 3),  class = 'table-bordered', caption = htmltools::tags$caption(
+ # style = 'caption-side: bottom; text-align: center;',
+  #'Table 5: ', htmltools::em('The Cleaned data used for Typology Analysis.')
+#), options = list(searching = FALSE,pageLength = 10,lengthMenu = c(5, 10, 15, 20), scrollX = T))
 
 ```
 
