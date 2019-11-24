@@ -153,7 +153,7 @@ income, and who cultivate land or keep livestock.]
 #knitr::include_graphics("map.png")
 ```
 
-```{r, message=FALSE, warning=FALSE,comment=FALSE,}
+```{r, message=FALSE, warning=FALSE,comment=FALSE}
 library(rgdal)
 library(leaflet)
 shapeData <- readOGR("StudyAreaMap/StudyArea.shp", "StudyArea", verbose = FALSE)
@@ -910,7 +910,9 @@ gg<-ggplot(df2,aes(x = value)) + stat_ecdf(aes(colour = variable, geom = "step")
   
   guides(fill=guide_legend(title = NULL))+
   labs(x="Yield in Kg/ha", y="ecd", title= "Empirical cumulative distribution of yield for Rice and Maize")+theme_light()+scale_fill_economist()+
+
   theme(legend.title=element_blank(),plot.title = element_text(hjust = 0.5, size = 12, family = "Arial"))
+
 gg
 
 
