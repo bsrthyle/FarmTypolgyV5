@@ -65,13 +65,7 @@ library(viridis)
 library(leaflet)
 library(here)
 
-
-
-
-# figure caption on top a hook function 
-
-
-#
+# set randome seed
 set.seed(7)
 
 ```
@@ -80,20 +74,15 @@ set.seed(7)
 rm(list = ls())
 # Read all the data sets to R
 list.filenames <- list.files(path = here("Data"), pattern = ".dta")
-
 # create an empity list to 
 list.data <- list()
 # loop through the file names and the data
-
 for(i in 1:length(list.filenames)){
   list.data[[i]] <- as_factor(haven::read_dta(paste0("Data/",list.filenames[i])), only_labelled = TRUE)
   #list.data2[[i]] <- foreign::read.dta(list.filenames[i], convert.factors = TRUE)
 }
 # attache file names to the list 
-
 names(list.data) <- list.filenames
-
-
 #global rounding function
 round_df <- function(x, digits) {
   # round all numeric variables
@@ -112,10 +101,19 @@ myColors <- list( "#2f1a5c",
                   "#e96050",
                   "#f98143",
                   "#ffa538")
-myColors2 <- list("#26547C","#EF476F","#FFD166","#06D6A0",
-                  "#454545","#9E2A2B","#E09F3E","#306B34"  
-                  , "#5603AD", "#52154E", "#20A4F3",
-                  "#0F8B8D","#F26419")
+myColors2 <- list("#26547C",
+                  "#EF476F",
+                  "#FFD166",
+                  "#06D6A0",
+                  "#454545",
+                  "#9E2A2B",
+                  "#E09F3E",
+                  "#306B34",  
+                  "#5603AD",
+                  "#52154E",
+                  "#20A4F3",
+                  "#0F8B8D",
+                  "#F26419")
 
 
 mycolor3 <- c("#19619d",
@@ -160,17 +158,11 @@ library(rgdal)
 library(leaflet)
 shapeData <- readOGR("StudyAreaMap/StudyArea.shp", "StudyArea", verbose = FALSE)
 shapeData <- spTransform(shapeData, CRS("+proj=longlat +datum=WGS84 +no_defs"))
-
 cities<- read.csv2(here("Data_csv", "wardCenterPoint.csv"))
 leaflet(shapeData) %>%
-  #  addTiles()%>%
-  #addProviderTiles(providers$Stamen.TerrainBackground)%>%
   addProviderTiles(providers$Esri.WorldImagery)%>%
   addProviderTiles(providers$OpenStreetMap, options = providerTileOptions(opacity = 0.2))%>%
   setView( lat = -8.350750, lng = 36.700436,zoom=9)%>% 
-  
-  # addCircles( lat = -8.350750, lng = 36.560436,radius =70000, opacity = 0.1)%>%
-  # addCircles( lat = -8.350750, lng = 36.560436,radius =65000, opacity = 0.1)%>%
   addPolygons(weight = 1, col ="white", fillColor = topo.colors(10, NULL),
               highlight = highlightOptions(color = "black", weight = 3, bringToFront = TRUE), label = paste0(shapeData$WARD_NAME," , ", "Farm Population: ", shapeData$NoFarmHH12) )%>%
   addCircles(data = cities, lng = ~lng, lat = ~lat, weight = 1,
@@ -200,7 +192,6 @@ administor the questionnaire and also to see how farmers understand the question
 asked. And some questions and potential answers were modified to the understanding
 of the villagers.
 
----
 # Socio-economic characterstics of Households
 
 ## Household Demographics
@@ -219,21 +210,28 @@ a small family. And 41 percent are medium sized with 5-8 numbers of members. 12
 percent of households in the sample are extended families, with more than 8 members
 
 ```{r fig.width=4, fig.height=4, fig.align='center'}
-sum <- summarytools::freq(list.data$combined4.1.dta$EducationLevel, order = "freq")
-sum <- sum[-5,]
-DT::datatable(round(sum,3), options = list(
-  bPaginate = FALSE
-), caption = htmltools::tags$caption(
-  style = 'caption-side: top; text-align: center;',
-  'Table 1: ', htmltools::em('Education of Household Head.')))
+sum <-
+  summarytools::freq(list.data$combined4.1.dta$EducationLevel, order = "freq")
+sum <- sum[-5, ]
+DT::datatable(
+  round(sum, 3),
+  options = list(bPaginate = FALSE),
+  caption = htmltools::tags$caption(
+    style = 'caption-side: top; text-align: center;',
+    'Table 1: ',
+    htmltools::em('Education of Household Head.')
+  )
+)
 
-sum2 <- summarytools::freq(list.data$combined4.1.dta$Age_Class, order = "freq")
-sum2 <- sum2[-5,]
-DT::datatable(round(sum2,3),options = list(
-  bPaginate = FALSE
-), caption = htmltools::tags$caption(
-  style = 'caption-side: top; text-align: center;',
-  'Table 2: ', htmltools::em('Age class of Household Head.')))
+sum2 <-
+  summarytools::freq(list.data$combined4.1.dta$Age_Class, order = "freq")
+sum2 <- sum2[-5, ]
+DT::datatable(
+  round(sum2, 3),
+  options = list(bPaginate = FALSE),
+  caption = htmltools::tags$caption(style = 'caption-side: top; text-align: center;',
+                                    'Table 2: ', htmltools::em('Age class of Household Head.'))
+)
 ```
 ```{r}
 df <- list.data$combined4.1.dta$gender
@@ -251,9 +249,7 @@ plot_ly(df2, labels= ~df, values= ~counts, marker = list(colors = mycolor3,
          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 
 ```
-```{r }
-
-
+```{r}
 x <- list.data$combinedNew.dta$HHsize
 fit<- density(x)
 plot_ly(x = x, type = "histogram",histnorm = "probability", name = "HH_size %") %>% 
@@ -262,10 +258,7 @@ plot_ly(x = x, type = "histogram",histnorm = "probability", name = "HH_size %") 
          xaxis = list(title="Household Size",showgrid = FALSE, zeroline = FALSE),
          yaxis = list(showgrid = FALSE, zeroline = FALSE))
 
-
 ```
-
----
 
 ## Livelihood and diversification
 
@@ -451,7 +444,6 @@ a <- list(
   ay = -20
 )
 
-g
 ggplotly(g)%>%
   layout(annotations = a, titlefont = list(family = "sans-serif"))
 
@@ -615,7 +607,7 @@ plot of farmers starting time of wetland use shows that household has been farmi
 wetland for over 40 years, however majority of the farmers acquired their farm in the
 past two three decades. There has been a surge in the number of farmers who started
 using the wetland for cropping activity in late 1980 and beginning of 2000.
-```{r}
+```{r eval=FALSE, echo=FALSE}
 x <- as.data.frame(list.data$TextQuestion.dta$wetstart)
 names(x)[1]<-"WetStart"
 x <- remove_missing(x)
@@ -623,9 +615,6 @@ fit <- dnorm(x$WetStart)
 
 plot_ly(x=x$WetStart, type = "histogram")
 ```
-
-
-
 
 ```{r}
 wetstart <- as.data.frame(list.data$TextQuestion.dta$wetstart)
@@ -653,7 +642,6 @@ ggplotly(p)
 wetstart3 <- reshape2::melt(wetstart2, id.vars = "WetStart")
 
 p <- ggplot(wetstart3, aes(x = WetStart, y = value))+
-  #geom_smooth(method = "loess")+
   facet_grid(variable~., scales = "free")+
   theme_minimal(base_family = "Arial")
 p 
@@ -809,16 +797,16 @@ df_3 <- df_2%>%
 
 ###### bar plot of land preparation for Rice
 plot_ly(df, x = ~LandPrep, y = ~prop, type = 'bar',  text = ~round(prop,2), textposition = 'outside',textfont = list(color = 'black', size=12), color =~LandPrep,  colors = mycolor3) %>%
-  layout(title = "Land Tenure",
-         xaxis = list(title = "Land tenure"),
+  layout(title = "Land Preparation Method for Rice cultivation",
+         xaxis = list(title = "Land Preparation Method"),
          yaxis = list(title = "Percent of Households"))
 ```
 
 #### Maize Land Preparation {-}
 ```{r}
 plot_ly(df_3, x = ~LandPrep, y = ~prop, type = 'bar',  text = ~round(prop,2), textposition = 'outside',textfont = list(color = 'black', size=12),color=~LandPrep, colors = "Set1") %>%
-  layout(title = "Land Tenure",
-         xaxis = list(title = "Land tenure"),
+  layout(title = "Land Preparation Method for Maize",
+         xaxis = list(title = "Land Preparation Method"),
          yaxis = list(title = "Percent of Households")) 
 ```
 
@@ -922,7 +910,9 @@ gg<-ggplot(df2,aes(x = value)) + stat_ecdf(aes(colour = variable, geom = "step")
   
   guides(fill=guide_legend(title = NULL))+
   labs(x="Yield in Kg/ha", y="ecd", title= "Empirical cumulative distribution of yield for Rice and Maize")+theme_light()+scale_fill_economist()+
-  theme(legend.title=element_blank(),plot.title = element_text(hjust = 0.5, size = 12))
+
+  theme(legend.title=element_blank(),plot.title = element_text(hjust = 0.5, size = 12, family = "Arial"))
+
 gg
 
 
@@ -940,10 +930,6 @@ input_1 <- reshape2::melt(input1)
 df <- input_1%>%
   group_by(variable)%>%
   dplyr::summarise(Avarage=mean(value, na.rm = T))
-
-
-
-
 
 plot_ly(df, labels = ~variable, values = ~Avarage, type = 'pie',
         textposition = 'inside',
@@ -966,8 +952,6 @@ plot_ly(df, labels = ~variable, values = ~Avarage, type = 'pie',
 
 ```{r}
 # read the intensification reason data 
-
-#data <- as_factor(haven::read_dta("../FarmTypology/Data/IntensificationReason2.dta"), "labels")
 data <- list.data$IntensificationReason2.dta
 ```
 
@@ -1242,7 +1226,6 @@ df2 <- df%>%
   group_by(Cope)%>%
   dplyr::summarise(count=n())%>%
   mutate(percent=(count/sum(count))*100)
-#df2$Cope <- factor(df2$Cope, levels= df2$Cope[order(df2$percent, decreasing = TRUE)])
 df3 <- remove_missing(round_df(df2))
 
 df3 <- df3[which(df3$percent > 2),]
@@ -1282,7 +1265,7 @@ names(original.data2) <- c(
   "Government officials are effective<br> in protecting the wetland",
   "It is safe to leave my home unattended<br> because no one can steal anything",
   "People in this area feel generally secure<br> when dealing with outsiders ",
-  "If I drop my wallet/purse somewhere within<br> this village, I am likely to get it back",
+  "If I drop my wallet or purse somewhere within<br> this village, I am likely to get it back",
   "People in this area have <br>strong traditional attachment to wetlands",
   "Most of my neighbours  have lost some assets <br> or livestock to thieves within the last five years",
   "Farm sizes in my village have <br>declined compared to the past",
@@ -1300,16 +1283,9 @@ df_summary_1 <- df_summary[c(1:6),]
 df_summary_2 <- df_summary[c(7:12),]
 df_summary_3 <- df_summary[c(13:19),]
 
-write.csv(df_summary_1, here::here("Data_csv","Perception1.csv"))
-write.csv(df_summary_2, here::here("Data_csv","Perception2.csv"))
-write.csv(df_summary_3, here::here("Data_csv","Perception3.csv"))
-#set.seed(10)
-#list.perceptiondata <-split(df_summary, sample(rep(1:4, 5)))
-#
-#for (i in 1:length(list.perceptiondata)) {
-
-# write.csv(list.perceptiondata[i], paste0("Perception", i, ".csv"))}
-
+# write.csv(df_summary_1, here::here("Data_csv","Perception1.csv"))
+# write.csv(df_summary_2, here::here("Data_csv","Perception2.csv"))
+# write.csv(df_summary_3, here::here("Data_csv","Perception3.csv"))
 
 ```
 
@@ -1355,9 +1331,6 @@ gg4<-plot(Result4,
 
 ```
 
-
-
-
 #### Perception One {-}
 
 ```{r, fig.width=8}
@@ -1379,8 +1352,8 @@ p <- plot_ly(data, x = ~x1, y = ~y, type = 'bar', orientation = 'h', name="Stron
                            line = list(color = 'rgb(248, 248, 249)', width = 1))) %>%
   add_trace(x = ~x2, name="Agree", marker = list(color = 'rgba(71, 58, 131, 0.8)')) %>%
   add_trace(x = ~x3,name="Neutral", marker = list(color = 'rgba(122, 120, 168, 0.8)')) %>%
-  add_trace(x = ~x4, ame="Disagree", marker = list(color = 'rgba(164, 163, 204, 0.85)')) %>%
-  add_trace(x = ~x5, ame="Strongly Disagree", marker = list(color = 'rgba(190, 192, 213, 1)')) %>%
+  add_trace(x = ~x4, name="Disagree", marker = list(color = 'rgba(164, 163, 204, 0.85)')) %>%
+  add_trace(x = ~x5, name="Strongly Disagree", marker = list(color = 'rgba(190, 192, 213, 1)')) %>%
   layout(xaxis = list(title = "",
                       showgrid = FALSE,
                       showline = FALSE,
@@ -1468,8 +1441,8 @@ p2 <- plot_ly(data, x = ~x1, y = ~y, type = 'bar', orientation = 'h', name="Stro
                             line = list(color = 'rgb(248, 248, 249)', width = 1))) %>%
   add_trace(x = ~x2, name="Agree", marker = list(color = 'rgba(71, 58, 131, 0.8)')) %>%
   add_trace(x = ~x3,name="Neutral", marker = list(color = 'rgba(122, 120, 168, 0.8)')) %>%
-  add_trace(x = ~x4, ame="Disagree", marker = list(color = 'rgba(164, 163, 204, 0.85)')) %>%
-  add_trace(x = ~x5, ame="Strongly Disagree", marker = list(color = 'rgba(190, 192, 213, 1)')) %>%
+  add_trace(x = ~x4, name="Disagree", marker = list(color = 'rgba(164, 163, 204, 0.85)')) %>%
+  add_trace(x = ~x5, name="Strongly Disagree", marker = list(color = 'rgba(190, 192, 213, 1)')) %>%
   layout(xaxis = list(title = "",
                       showgrid = FALSE,
                       showline = FALSE,
@@ -1557,8 +1530,8 @@ p3 <- plot_ly(data, x = ~x1, y = ~y, type = 'bar', orientation = 'h', name="Stro
                             line = list(color = 'rgb(248, 248, 249)', width = 1))) %>%
   add_trace(x = ~x2, name="Agree", marker = list(color = 'rgba(71, 58, 131, 0.8)')) %>%
   add_trace(x = ~x3,name="Neutral", marker = list(color = 'rgba(122, 120, 168, 0.8)')) %>%
-  add_trace(x = ~x4, ame="Disagree", marker = list(color = 'rgba(164, 163, 204, 0.85)')) %>%
-  add_trace(x = ~x5, ame="Strongly Disagree", marker = list(color = 'rgba(190, 192, 213, 1)')) %>%
+  add_trace(x = ~x4, name="Disagree", marker = list(color = 'rgba(164, 163, 204, 0.85)')) %>%
+  add_trace(x = ~x5, name="Strongly Disagree", marker = list(color = 'rgba(190, 192, 213, 1)')) %>%
   layout(xaxis = list(title = "",
                       showgrid = FALSE,
                       showline = FALSE,
@@ -1574,6 +1547,8 @@ p3 <- plot_ly(data, x = ~x1, y = ~y, type = 'bar', orientation = 'h', name="Stro
          paper_bgcolor = 'rgb(248, 248, 255)', plot_bgcolor = 'rgb(248, 248, 255)',
          margin = list(l = 150, r = 5, t = 140, b = 60),
          showlegend = FALSE) %>%
+  
+  
   # labeling the y-axis
   add_annotations(xref = 'paper', yref = 'y', x = 0.14, y = y,
                   xanchor = 'right',
@@ -1803,9 +1778,6 @@ The hierarchy is represented by a dendrogram which is indexed by the gain of wit
 ```{r, cache=TRUE}
 # Compute HCPC
 res.hcpc2 <- HCPC(pca1, graph = FALSE)
-# Data with cluster assignements
-#head(res.hcpc2$data.clust, 10)
-
 
 # Plot the dendrogram only
 f<-fviz_dend(res.hcpc2, cex = 0.5, show_labels = FALSE, k_colors = c("#26547C","#EF476F","#FFD166"), rect = TRUE, rect_fill = TRUE, rect_border = c("#26547C","#EF476F","#FFD166"),lower_rect = -0.1, ggtheme = theme_grey())
@@ -1813,7 +1785,6 @@ f<-fviz_dend(res.hcpc2, cex = 0.5, show_labels = FALSE, k_colors = c("#26547C","
 
 ggplotly(f)%>% layout(showlegend=F)
 # Draw only the factor map
-#plot(res.hcpc2, choice ="map", draw.tree = FALSE,ind.names = FALSE, centers.plot = TRUE, title = "")
 g <-fviz_cluster(res.hcpc2, geom = "point", title = "Factor Map", palette = "jco")+theme_minimal() 
 ggplotly(g)%>%
   layout(showlegend=F)
@@ -1889,12 +1860,9 @@ plot_ly(df, labels = ~value, values = ~prop, type = 'pie',
 ```
 
 
-```{r}
-#foodsecurity <- as_factor(haven::read_dta(here("Data", "FoodSecurityFinal.dta"), "labels"))
+```{r echo=FALSE,eval=FALSE}
 
 foodsecurity1 <- list.data$FoodSecurityFinal.dta
-
-#foodsecurity1 <- read.csv("FoodSecu_test.csv")
 
 foodsecurity2 <- foodsecurity1[which(foodsecurity1$PercapitaDailyEnergyAcquistion >= 0),]
 
@@ -1914,8 +1882,6 @@ g <- ggplot(foodsecurity, aes(foodsecurity$PercapitaDailyEnergyAcquistion_1, col
   geom_vline(aes(xintercept=2731),color="blue", linetype="dashed", size=0.5)+
   
   facet_grid(~clust)+
-  #scale_fill_manual(values=c("#26547C","#EF476F","#FFD166"))+
-  
   theme_light()+ theme(legend.position="none")
 
 a <- list(
@@ -1930,7 +1896,6 @@ a <- list(
   ay = -20
 )
 
-g
 ggplotly(g)%>%
   layout(annotations = a, titlefont = list(family = "sans-serif"))
 
@@ -1938,7 +1903,7 @@ ggplotly(g)%>%
 
 From the box plots below one can observe the main differences in terms of different farm attributes important to understand farm management and land use trajectories. 
 
-```{r}
+```{r echo=FALSE}
 
 # df_box <- myData2
 # levels(df_box$clust) <- c("Mono-crop Rice Producers","Diversifier", "Agro-Pastoralist")
@@ -2100,7 +2065,7 @@ g
 
 ```
 
-```{r}
+```{r echo=FALSE}
 # dfPlot2 <- function(df){
 #   df2 <- df
 #   ln <- length(names(df))
@@ -2115,12 +2080,6 @@ g
 #   }
 
 ```
-
-```{r}
-#dfPlot2(myData2)
-```
-
-
 # Validation of Typology with the 2007 Agriculture Sample Survey
 
 In order to check the validity and stability of the clusters identified above. we conducted the same clustering algorithm using the 2007 Agriculture sample survey of Tanzania. The data contains 810 observation across 54 villages in kilombero and Ulanga districts. The selection of the variables and algorithms are the same as the above analysis. However, the ASS data misses two important variables , `Percapita income` , `amount of labour used in crop productio`. 
