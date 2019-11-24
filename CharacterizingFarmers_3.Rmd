@@ -1664,10 +1664,11 @@ DT::datatable(round_df(head(eigenvalues[, 1:2]),4), class = 'table-bordered', op
 The correlation between a variable and a PC is called loading. The variables can be plotted as points in the component space using their loadings as coordinates. The squared loadings for variables are called cos2 ( = cor * cor = coord * coord). The cos2 values are used to estimate the quality of the representation. The closer a variable is to the circle of correlations,the better its representation on the factor map . Variables that are closed to the center of the plot are less important for the first components.
 
 ```{r}
-fviz_pca_var(pca1, col.var="cos2", title = "") +
+g <- fviz_pca_var(pca1, col.var="cos2", title = "") +
   scale_color_gradient2(low="white", mid="green", high="red", midpoint=0.5) + theme_minimal()
-
+ggplotly(g)
 ```
+
 The following table and figures show the contributions of variables in accounting for the variability in a given principal component. For example Farm size in Ha account 34 percent of the first component followed by tropical livestock unit(TLU) accounting 27 percent of variability. On the other hand , due to orthogonality of the components different set of variables explain the variability of the second component with land share of rice and maze accounting 70 percent of the variability.  
 
 ```{r}
