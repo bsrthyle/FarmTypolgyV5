@@ -955,7 +955,7 @@ plot_ly(df, labels = ~variable, values = ~Avarage, type = 'pie',
 data <- list.data$IntensificationReason2.dta
 ```
 
-```{r}
+```{r, eval=FALSE, echo=FALSE}
 df <- data$D9d
 
 df <- as.data.frame(df)
@@ -980,7 +980,7 @@ plot_ly(df2, labels= ~df, values= ~prop, textposition = 'auto',
          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),margin=list(l = 10, r = 10, t = 30, b = 80),legend = list(orientation = 'h'))
 ```
-```{r}
+```{r, eval=FALSE, echo=FALSE}
 df <- data$D10h
 
 df <- as.data.frame(df)
@@ -1003,7 +1003,7 @@ plot_ly(df2, labels= ~df, values= ~prop, textposition = 'auto', marker=list(colo
          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),margin=list(l = 10, r = 10, t = 30, b = 80),legend = list(orientation = 'h'))
 ```
-```{r}
+```{r, eval=FALSE, echo=FALSE}
 df <- data$D11c
 
 df <- as.data.frame(df)
@@ -1030,7 +1030,7 @@ plot_ly(df2, labels= ~df, values= ~prop, textposition = 'auto', marker=list(colo
          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),margin=list(l = 10, r = 10, t = 30, b = 80),legend = list(orientation = 'h'))
 ```
 
-```{r}
+```{r, eval=FALSE, echo=FALSE}
 df <- data$D12b
 
 df <- as.data.frame(df)
