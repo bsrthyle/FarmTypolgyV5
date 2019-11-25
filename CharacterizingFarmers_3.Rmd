@@ -20,7 +20,7 @@ output:
     toc: yes
     toc_depth: 2
     toc_float:
-      collapsed: no
+      collapsed: yes
 bibliography: mybib.bib
 nocite: '@*'
    
@@ -2449,6 +2449,14 @@ g
 
 ```
 
+## Session Info
+
+```{r}
+pander::pander(sessionInfo())
+```
+
 
 ## References
+
+
 
