@@ -2451,8 +2451,8 @@ g
 
 ## Session Info
 
-```{r}
-pander::pander(sessionInfo())
+```{r, results='asis'}
+pander::pander(sessionInfo(), compact=FALSE)
 ```
 
 
