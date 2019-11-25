@@ -1,7 +1,7 @@
 
-![](https://img.shields.io/badge/Framework-RStudio%202.5-brightgreen.svg?longCache=true&style=flat-square)
+![](https://img.shields.io/badge/IDE-RStudio%201.2.5019-brightgreen.svg?longCache=true&style=flat-square)
 ![](https://img.shields.io/badge/Analysis-R%203.6-brightgreen.svg?longCache=true&style=flat-square)
-![](https://img.shields.io/badge/Dependency-GDAL-brightgreen.svg?longCache=true&style=flat-square)
+![](https://img.shields.io/badge/Dependency-GDAL|Tidyverse|FactoMineR-brightgreen.svg?longCache=true&style=flat-square)
 ![CocoaPods](https://img.shields.io/cocoapods/dm/AFNetworking.svg?style=flat-square)
 ![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg?longCache=true&style=flat-square)
 ![GitHub issue/pull request age](https://img.shields.io/github/issues/detail/age/badges/shields/979.svg?longCache=true&style=flat-square)
