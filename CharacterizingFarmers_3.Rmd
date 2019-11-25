@@ -2334,6 +2334,7 @@ g <- ggplot(DataWithCluster, aes(FarmType, SizeOfCropLand)) + geom_boxplot(aes(f
     plot.title = element_text(hjust = 0.5, size = 12)
   )
 g
+
 g <- ggplot(DataWithCluster, aes(FarmType, ShareOfRice)) + geom_boxplot(aes(fill = FarmType),
                                                                         width =
                                                                           0.4, alpha = 0.5
