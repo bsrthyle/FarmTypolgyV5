@@ -1,0 +1,94 @@
+
+@import url('https://fonts.googleapis.com/css?family=Cuprum');
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
+
+
+
+
+body {
+text-align: justify;
+font-size :18px;
+font-family: 'Segoe UI';
+color: #3e3838;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Segoe UI","Cuprum",Tahoma,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 500;
+    line-height: 1.1;
+    color: #3a87ad;
+
+  
+}
+    
+
+    
+h1, h2, h3 {
+    font-family: "Segoe UI","Cuprum",Tahoma,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 500;
+    line-height: 1.1;
+    color: #0e0e0e;
+    background-color: #edf0f2;
+    padding: 10px;
+    text-align:left;
+}
+
+
+h1.title {
+    font-size: 36px;
+    text-align: center;
+    color: #3a87ad;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+caption {
+    
+    color: #1528b9;
+    
+}
+
+#table-of-contents h2 {
+    background-color: #268ce4;
+    
+}
+
+#table-of-contents a {
+  color:#111;
+}
+
+#table-of-contents{
+  background:#edf0f2;
+}
+
+a{
+  color:#f9f9f9;
+  text-align: left;
+}
+
+#postamble{
+  text-align:left;
+  border-top: solid 10px #eab953;
+  background: #268ce4;
+  font-size: 80%;
+}
+
+code, kbd, pre, samp {
+    font-family: 'Ubuntu Mono',Menlo,Monaco,Consolas,"Courier New",monospace;
+}
+
+#main .nav-tabs li.active a {
+    color: #333;
+    border-bottom: 1px solid #fcfcfc;
+    background-color: #387bf38c;
+}
+.nav-tabs>li>a {
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 0 0 0 0;
+}
+
+
