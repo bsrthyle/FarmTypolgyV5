@@ -3,7 +3,10 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
 @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
 
-
+@font-face{
+  font-family: Aurulent;
+  src: url(AurulentSansMono_Regular.otf);
+}
 
 
 body {
@@ -76,7 +79,13 @@ a{
 }
 
 code, kbd, pre, samp {
-    font-family: 'Ubuntu Mono',Menlo,Monaco,Consolas,"Courier New",monospace;
+    font-family: Aurulent,'Ubuntu Mono',Menlo,Monaco,Consolas,"Courier New",monospace;
+}
+
+
+
+#content pre code {
+  font-family: Aurulent,'Ubuntu Mono',Menlo,Monaco,Consolas,"Courier New",monospace;
 }
 
 #main .nav-tabs li.active a {
