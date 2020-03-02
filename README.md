@@ -7,7 +7,7 @@
 ![GitHub issue/pull request age](https://img.shields.io/github/issues/detail/age/badges/shields/979.svg?longCache=true&style=flat-square)
 
 # FarmTypology
-This notebook contains the code and result of a study done to characterize farmers and farming systems in Kilombero vallex flood plain. The notebook is structured in to four main section. 
+This notebook contains the code and result of a study done to characterize farmers and farming systems in Kilombero valley flood plain. The notebook is structured in to four main section. 
 
 * The first section provides the details of the data collection methods and instrument used for this study. 
 
