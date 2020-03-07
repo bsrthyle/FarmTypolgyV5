@@ -1,9 +1,10 @@
 ---
 title: "Characterizing Farmers and Farming system in Kilombero Valley Floodplain,Tanzania"
 author: 
-  affiliation: Institute of Food and Resource Economics<br> University of Bonn
-  email: <i class="fa fa-envelope"></i> bisrat[dot]gebrekidan[at]ilr.uni-bonn.de
-  name: Bisrat H. Gebrekidan
+  - name: '[Bisrat H. Gebrekidan*](mailto:bisrat.gebrekidan@ilr.uni-bonn.de)'
+  - name: Dr. Sebastian Rash
+  - name: Prof. Dr. Thomas Heckelei
+    affiliation: '<i class="fas fa-university" style="padding-right: 0.7em;"></i>  [ILR, University of Bonn](https://www.ilr1.uni-bonn.de/en)'
 date: "6/2/2017"
 output: 
   rmdformats::readthedown: 
@@ -27,7 +28,7 @@ nocite: '@*'
 knitr::opts_chunk$set( warning = FALSE, message = FALSE, tidy.opts=list(width.cutoff=10),tidy=TRUE) 
 options(width=100)
 #load the required libraries
-
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 library(ggplot2)
 library(dplyr)
 library(plotly)
