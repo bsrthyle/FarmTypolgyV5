@@ -1807,7 +1807,7 @@ type2 <- res.hcpc2$desc.var$quanti$`2`
 type3 <- res.hcpc2$desc.var$quanti$`3`
 
 
-DT::datatable(round_df(type,5), class = 'table-bordered', options = list(searching = FALSE,pageLength = 10,lengthMenu = c(5, 10, 15, 20), scrollX = T), caption = htmltools::tags$caption(
+DT::datatable(round_df(type,3), class = 'table-bordered', options = list(searching = FALSE,pageLength = 10,lengthMenu = c(5, 10, 15, 20), scrollX = F), caption = htmltools::tags$caption(
   style = 'caption-side: top; text-align: center;',
   'Table 8: ', htmltools::em('Link between the cluster variable and the quantitative variables.')))
 
